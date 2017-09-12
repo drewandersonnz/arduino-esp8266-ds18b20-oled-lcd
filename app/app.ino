@@ -98,8 +98,6 @@ void setup() {
 
   mdns.begin("esp8266", WiFi.localIP());
 
-  runDisplay();
-
   server.on("/", [](){
     server.send(200, "text/html", "Hello");
   });
