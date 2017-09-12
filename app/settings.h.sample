@@ -1,0 +1,7 @@
+/*
+Copy this file to setting.h and update with your settings
+*/
+
+// Replace with your network credentials
+const char* wifi_ssid = "ssid";
+const char* wifi_password = "password";
