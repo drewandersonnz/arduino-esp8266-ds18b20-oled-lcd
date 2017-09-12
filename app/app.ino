@@ -102,6 +102,13 @@ void setup() {
     server.send(200, "text/html", "Hello");
   });
 
+  server.on("/prometheus", [](){
+    String result = "";
+    result += "temperature0 " + (String)displayTemp + "\n";
+    result += "uptime " + (String)( (float) millis() / 1000 ) + "\n";
+    server.send(200, "text/plain", result);
+  });
+
   server.begin();
 }
 
