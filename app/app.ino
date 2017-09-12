@@ -74,6 +74,21 @@ void runDisplay() {
   display.display();
 }
 
+unsigned long lastStableTime = 0;
+bool checkStability() {
+  if ((millis() - lastStableTime) > (10 * 1000)) {
+    ESP.restart();
+    return false;
+  }
+  
+  if (WiFi.status() != WL_CONNECTED) {
+    return false;
+  }
+
+  lastStableTime = millis();
+  return true;
+}
+
 void setup() {
   // put your setup code here, to run once:
   display.begin(SSD1306_SWITCHCAPVCC, 0x3C);  // initialize with the I2C addr 0x3D (for the 128x64)
@@ -94,6 +109,8 @@ void setup() {
 
 void loop() {
   unsigned long loopTimer = millis();
+
+  checkStability();
   
   server.handleClient();
   
