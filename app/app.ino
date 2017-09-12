@@ -89,10 +89,14 @@ void setup() {
     server.send(200, "text/html", "Hello");
   });
 
+  server.begin();
 }
 
 void loop() {
   unsigned long loopTimer = millis();
+  
+  server.handleClient();
+  
   runDisplay();
   
   DS18B20.requestTemperatures(); 
